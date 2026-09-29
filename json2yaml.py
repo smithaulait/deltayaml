@@ -1,6 +1,5 @@
 import json
 import pathlib
-from io import StringIO
 
 
 def json2yaml(file_json: pathlib.Path, indent="  "):
@@ -9,9 +8,7 @@ def json2yaml(file_json: pathlib.Path, indent="  "):
         file_data: dict[str, str] = json.load(f)
     with open(file_yaml, "w", encoding="utf-8") as f:
         for k in file_data:
-            f.write(k)
-            f.write(": |-\n")
-            f.write(indent)
+            f.write(k + ": " + "|-" + "\n" + indent)
             for c in file_data[k]:
                 f.write(c)
                 if c == "\n":
